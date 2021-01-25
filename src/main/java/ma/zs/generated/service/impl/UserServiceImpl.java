@@ -1,8 +1,12 @@
 package ma.zs.generated.service.impl;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.jaas.JaasGrantedAuthority;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
@@ -94,7 +98,9 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
 		User user=userDao.findByEmail(s);
-		org.springframework.security.core.userdetails.User userDetailsUser= new org.springframework.security.core.userdetails.User(user.getEmail(),user.getPassword(),new ArrayList<>());
+		Collection<GrantedAuthority> authorities= new ArrayList<>();
+		authorities.add(new SimpleGrantedAuthority(user.getAuthority().getAuthority()));
+		org.springframework.security.core.userdetails.User userDetailsUser= new org.springframework.security.core.userdetails.User(user.getEmail(),user.getPassword(),authorities);
 		return userDetailsUser;
 	}
 }

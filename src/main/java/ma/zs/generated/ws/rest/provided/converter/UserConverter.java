@@ -41,6 +41,8 @@ public class UserConverter extends AbstractConverter<User, UserVo> {
                 item.setId(NumberUtil.toLong(vo.getId()));
             if (StringUtil.isNotEmpty(vo.getEmail()))
                 item.setEmail(vo.getEmail());
+            if (StringUtil.isNotEmpty(vo.getPassword()))
+                item.setPassword(vo.getPassword());
             if (StringUtil.isNotEmpty(vo.getCreatedDate()))
                 item.setCreated(DateUtil.parse(vo.getCreatedDate()));
             if (vo.getRoleVo() != null && this.role)
@@ -87,6 +89,8 @@ public class UserConverter extends AbstractConverter<User, UserVo> {
                 vo.setId(NumberUtil.toString(item.getId()));
             if (item.getEmail() != null)
                 vo.setEmail(item.getEmail());
+            if (item.getPassword() != null)
+                vo.setPassword(item.getPassword());
             if (item.getCreated() != null)
                 vo.setCreatedDate(DateUtil.formateDate(item.getCreated()));
             if (item.getAuthority() != null && this.role)

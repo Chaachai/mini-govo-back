@@ -3,6 +3,7 @@ package  ma.zs.generated.ws.rest.provided.facade;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,8 +20,10 @@ import ma.zs.generated.ws.rest.provided.converter.RoleConverter;
 import ma.zs.generated.ws.rest.provided.vo.RoleVo;
 
 @Api("Manages role services")
+
 @RestController
 @RequestMapping("generated/role")
+//@PreAuthorize("hasRole('Client')")
 public class RoleRest {
 
 	@Autowired 
