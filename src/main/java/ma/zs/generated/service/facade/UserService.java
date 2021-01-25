@@ -3,8 +3,9 @@ package ma.zs.generated.service.facade;
 import java.util.List;
 import ma.zs.generated.bean.User;
 import ma.zs.generated.ws.rest.provided.vo.UserVo;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
-public interface UserService {
+public interface UserService extends UserDetailsService {
 
         /**
 

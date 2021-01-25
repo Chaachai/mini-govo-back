@@ -11,5 +11,5 @@ import ma.zs.generated.bean.User;
 public interface UserDao extends JpaRepository<User,Long> {
 
 
-
+    User findByEmail(String email);
 }

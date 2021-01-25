@@ -3,6 +3,8 @@ package ma.zs.generated.service.impl;
 import java.util.List;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.stereotype.Service;
@@ -87,6 +89,12 @@ public class UserServiceImpl implements UserService {
 		 	 query += SearchUtil.addConstraint( "o", "id","=",userVo.getId());
 	 return entityManager.createQuery(query).getResultList();
 	}
-	
- 
+
+
+	@Override
+	public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+		User user=userDao.findByEmail(s);
+		org.springframework.security.core.userdetails.User userDetailsUser= new org.springframework.security.core.userdetails.User(user.getEmail(),user.getPassword(),new ArrayList<>());
+		return userDetailsUser;
+	}
 }
