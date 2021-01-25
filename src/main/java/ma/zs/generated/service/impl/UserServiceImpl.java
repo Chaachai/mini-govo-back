@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.stereotype.Service;
@@ -47,7 +48,8 @@ public class UserServiceImpl implements UserService {
    }
 	@Override	
 	public User save (User user){
-
+		if (user.getPassword()!=null)
+			user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
 	    User savedUser = userDao.save(user);
 	   return savedUser;
 	}
