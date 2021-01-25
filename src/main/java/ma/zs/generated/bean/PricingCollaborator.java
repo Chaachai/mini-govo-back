@@ -17,6 +17,10 @@ public class PricingCollaborator {
      private BigDecimal priceMax ;
      private BigDecimal price ;
      private BigDecimal priceMin ;
+     @ManyToOne
+     private Product product;
+     @ManyToOne
+     private User collaborator;
 
 
      public PricingCollaborator(){
@@ -48,7 +52,20 @@ public class PricingCollaborator {
           this.price = price;
      }
 
+     public Product getProduct() {
+          return product;
+     }
 
+     public void setProduct(Product product) {
+          this.product = product;
+     }
 
+     public User getCollaborator() {
+          return collaborator;
+     }
+
+     public void setCollaborator(User collaborator) {
+          this.collaborator = collaborator;
+     }
 }
 

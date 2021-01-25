@@ -1,6 +1,9 @@
 package  ma.zs.generated.ws.rest.provided.vo;
 
-import java.math.BigDecimal;   
+import ma.zs.generated.bean.Product;
+import ma.zs.generated.bean.User;
+
+import java.math.BigDecimal;
 
 public class PricingCollaboratorVo {
      private String priceMax ;
@@ -11,8 +14,11 @@ public class PricingCollaboratorVo {
      private String priceMaxMin ;
      private String priceMinMax ;
      private String priceMinMin ;
+    private ProductVo product;
+    private UserVo collaborator;
 
- public PricingCollaboratorVo(){
+
+    public PricingCollaboratorVo(){
        super();
      }
 
@@ -78,5 +84,21 @@ public class PricingCollaboratorVo {
 
     public void setPriceMinMin(String priceMinMin) {
         this.priceMinMin = priceMinMin;
+    }
+
+    public ProductVo getProduct() {
+        return product;
+    }
+
+    public void setProduct(ProductVo product) {
+        this.product = product;
+    }
+
+    public UserVo getCollaborator() {
+        return collaborator;
+    }
+
+    public void setCollaborator(UserVo collaborator) {
+        this.collaborator = collaborator;
     }
 }
