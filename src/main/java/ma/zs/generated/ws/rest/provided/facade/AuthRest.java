@@ -5,6 +5,7 @@ import ma.zs.generated.service.facade.UserService;
 import ma.zs.generated.service.util.JwtUtil;
 import ma.zs.generated.ws.rest.provided.converter.UserConverter;
 import ma.zs.generated.ws.rest.provided.vo.AuthRequest;
+import ma.zs.generated.ws.rest.provided.vo.AuthResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -29,7 +30,7 @@ public class AuthRest {
 
 
     @PostMapping(value = "/login")
-    public String login(@RequestBody AuthRequest authRequest) throws Exception{
+    public AuthResponse login(@RequestBody AuthRequest authRequest) throws Exception{
 		try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
@@ -40,7 +41,14 @@ public class AuthRest {
         }catch (Exception e){
 		    throw new Exception("invalid credentials");
         }
-		return jwtUtil.generateToken(authRequest.getEmail());
+		userConverter.setRole(Boolean.TRUE);
+		userConverter.setCity(Boolean.TRUE);
+		userConverter.setSpecialityCollaborators(Boolean.TRUE);
+		userConverter.setRatings(Boolean.TRUE);
+		userConverter.setCommands(Boolean.TRUE);
+
+		return new AuthResponse(jwtUtil.generateToken(authRequest.getEmail()), userConverter.toVo(userService.findByEmail(authRequest.getEmail())));
+
 
 
         //		Object result = userService.login(authRequest);

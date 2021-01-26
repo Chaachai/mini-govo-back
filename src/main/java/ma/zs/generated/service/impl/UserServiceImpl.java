@@ -96,6 +96,11 @@ public class UserServiceImpl implements UserService {
 	 return entityManager.createQuery(query).getResultList();
 	}
 
+	@Override
+	public User findByEmail(String email) {
+		return userDao.findByEmail(email);
+	}
+
 
 	@Override
 	public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {

@@ -94,7 +94,7 @@ public class UserConverter extends AbstractConverter<User, UserVo> {
                 vo.setPassword(item.getPassword());
             if (item.getCreated() != null)
                 vo.setCreatedDate(DateUtil.formateDate(item.getCreated()));
-            if (item.getAuthority() != null && this.role)
+            if (item.getAuthority() != null && role)
                 vo.setRoleVo(roleConverter.toVo(item.getAuthority()));
             if (item.getFirstName() != null)
                 vo.setFirstName(item.getFirstName());
@@ -106,7 +106,7 @@ public class UserConverter extends AbstractConverter<User, UserVo> {
                 vo.setPhoneNumber(item.getPhoneNumber());
             if (item.getAddress() != null)
                 vo.setAddress(item.getAddress());
-            if (item.getCity() != null && this.city)
+            if (item.getCity() != null && city)
                 vo.setCityVo(cityConverter.toVo(item.getCity()));
             if (item.getLongitude() != null)
                 vo.setLongitude(NumberUtil.toString(item.getLongitude()));
@@ -116,11 +116,11 @@ public class UserConverter extends AbstractConverter<User, UserVo> {
                 vo.setEnabled(NumberUtil.toString(item.getEnabled()));
             if (item.getEnabledNewCommand() != null)
                 vo.setEnabledNewCommand(NumberUtil.toString(item.getEnabledNewCommand()));
-            if (item.getSpecialityCollaborators() != null && this.specialityCollaborators)
+            if (item.getSpecialityCollaborators() != null && specialityCollaborators)
                 vo.setSpecialityCollaboratorsVos(specialiteCollaboratorConverter.toVo(item.getSpecialityCollaborators()));
-            if (item.getRatings() != null && this.specialityCollaborators)
+            if (item.getRatings() != null && specialityCollaborators)
                 vo.setRatingVos(ratingConverter.toVo(item.getRatings()));
-            if (item.getCommands() != null && this.specialityCollaborators)
+            if (item.getCommands() != null && specialityCollaborators)
                 vo.setCommandVos(commandConverter.toVo(item.getCommands()));
             return vo;
 

@@ -67,4 +67,6 @@ public interface UserService extends UserDetailsService {
      * @return the searhed list User 
      */
 	List<User> findByCriteria( UserVo userVo);
+
+	User findByEmail(String email);
 }
