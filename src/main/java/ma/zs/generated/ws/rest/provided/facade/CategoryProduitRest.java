@@ -32,6 +32,8 @@ public class CategoryProduitRest {
     @ApiOperation("Saves the specified categoryProduit")
 	@PostMapping("/")
 	public CategoryProduitVo save(@RequestBody CategoryProduitVo categoryProduitVo){
+		System.out.println(categoryProduitVo);
+		categoryProduitConverter.setSuperCategoryProduct(Boolean.TRUE);
 		CategoryProduit categoryProduit= categoryProduitConverter.toItem(categoryProduitVo);
 	  categoryProduit=	categoryProduitService.save(categoryProduit);
 		return categoryProduitConverter.toVo(categoryProduit);
@@ -47,6 +49,7 @@ public class CategoryProduitRest {
 	@ApiOperation("Updates the specified categoryProduit")
 	@PutMapping("/")
 	public CategoryProduitVo update(@RequestBody CategoryProduitVo categoryProduitVo){
+		System.out.println(categoryProduitVo);
 		CategoryProduit categoryProduit= categoryProduitConverter.toItem(categoryProduitVo);
 	  categoryProduit=	categoryProduitService.update(categoryProduit);
 		return categoryProduitConverter.toVo(categoryProduit);

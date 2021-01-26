@@ -92,6 +92,8 @@ public class CategoryProduitServiceImpl implements CategoryProduitService {
 				  else
 				  categoryProduit.setSuperCategoryProduct(superCategoryProduct);
 			  }
+		String filePath=ImageUtil.storeImage("./src/main/resources/images/categoryproduits/",categoryProduit.getLabel(),categoryProduit.getImagePath());
+		categoryProduit.setImagePath(filePath);
 
 	    CategoryProduit savedCategoryProduit = categoryProduitDao.save(categoryProduit);
 	   return savedCategoryProduit;

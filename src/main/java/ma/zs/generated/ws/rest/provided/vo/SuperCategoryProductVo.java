@@ -51,11 +51,13 @@ public class SuperCategoryProductVo {
           this.id = id;
      }
 
-
-     
-
-
-
-
-
+    @Override
+    public String toString() {
+        return "SuperCategoryProductVo{" +
+                "description='" + description + '\'' +
+                ", imagePath='" + imagePath + '\'' +
+                ", label='" + label + '\'' +
+                ", id='" + id + '\'' +
+                '}';
+    }
 }

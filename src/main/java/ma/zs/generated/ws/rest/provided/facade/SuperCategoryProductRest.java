@@ -2,21 +2,16 @@ package  ma.zs.generated.ws.rest.provided.facade;
 
 import java.util.List;
 
+import ma.zs.generated.ws.rest.provided.vo.SaveSuperCategoryRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import ma.zs.generated.bean.SuperCategoryProduct; 
 import ma.zs.generated.service.facade.SuperCategoryProductService;
 import ma.zs.generated.ws.rest.provided.converter.SuperCategoryProductConverter;
 import ma.zs.generated.ws.rest.provided.vo.SuperCategoryProductVo;
+import org.springframework.web.multipart.MultipartFile;
 
 @Api("Manages superCategoryProduct services")
 @RestController
@@ -34,8 +29,16 @@ public class SuperCategoryProductRest {
 	public SuperCategoryProductVo save(@RequestBody SuperCategoryProductVo superCategoryProductVo){
 		SuperCategoryProduct superCategoryProduct= superCategoryProductConverter.toItem(superCategoryProductVo);
 	  superCategoryProduct=	superCategoryProductService.save(superCategoryProduct);
+	  return superCategoryProductConverter.toVo(superCategoryProduct);
+	}
+
+	/*
+	public SuperCategoryProductVo save(@RequestParam(value = "data") SuperCategoryProductVo superCategoryProductVo, @RequestParam(value = "file",required = false)MultipartFile file){
+		SuperCategoryProduct superCategoryProduct= superCategoryProductConverter.toItem(superCategoryProductVo);
+	  superCategoryProduct=	superCategoryProductService.save(superCategoryProduct);
 		return superCategoryProductConverter.toVo(superCategoryProduct);
 	}
+	 */
 
     @ApiOperation("Delete the specified superCategoryProduct")
 	@DeleteMapping("/")

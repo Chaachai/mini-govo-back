@@ -52,9 +52,14 @@ public class CategoryProduitVo {
      public void setSuperCategoryProductVo(SuperCategoryProductVo superCategoryProductVo){
           this.superCategoryProductVo = superCategoryProductVo;
      }
-   
 
-
-
-
+    @Override
+    public String toString() {
+        return "CategoryProduitVo{" +
+                "imagePath='" + imagePath + '\'' +
+                ", label='" + label + '\'' +
+                ", id='" + id + '\'' +
+                ", superCategoryProductVo=" + superCategoryProductVo +
+                '}';
+    }
 }
