@@ -62,7 +62,7 @@ public class OrderStatusVo {
      public void setSuperOrderStatusVo(SuperOrderStatusVo superOrderStatusVo){
           this.superOrderStatusVo = superOrderStatusVo;
      }
-   
+
 
 
 
