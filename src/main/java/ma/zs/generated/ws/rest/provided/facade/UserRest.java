@@ -32,6 +32,7 @@ public class UserRest {
     @ApiOperation("Saves the specified user")
     @PostMapping("/")
     public UserVo save(@RequestBody UserVo userVo) {
+    	userConverter.setRole(Boolean.TRUE);
         User user = userConverter.toItem(userVo);
         user = userService.save(user);
         return userConverter.toVo(user);

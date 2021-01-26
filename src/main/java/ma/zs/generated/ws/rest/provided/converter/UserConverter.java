@@ -45,7 +45,8 @@ public class UserConverter extends AbstractConverter<User, UserVo> {
                 item.setPassword(vo.getPassword());
             if (StringUtil.isNotEmpty(vo.getCreatedDate()))
                 item.setCreated(DateUtil.parse(vo.getCreatedDate()));
-            if (vo.getRoleVo() != null && this.role)
+            if (vo.getRoleVo() != null
+                    && role)
                 item.setAuthority(roleConverter.toItem(vo.getRoleVo()));
             if (StringUtil.isNotEmpty(vo.getFirstName()))
                 item.setFirstName(vo.getFirstName());
