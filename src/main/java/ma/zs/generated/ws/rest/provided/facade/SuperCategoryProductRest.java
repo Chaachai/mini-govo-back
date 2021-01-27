@@ -2,7 +2,6 @@ package  ma.zs.generated.ws.rest.provided.facade;
 
 import java.util.List;
 
-import ma.zs.generated.ws.rest.provided.vo.SaveSuperCategoryRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.Api;
@@ -11,7 +10,6 @@ import ma.zs.generated.bean.SuperCategoryProduct;
 import ma.zs.generated.service.facade.SuperCategoryProductService;
 import ma.zs.generated.ws.rest.provided.converter.SuperCategoryProductConverter;
 import ma.zs.generated.ws.rest.provided.vo.SuperCategoryProductVo;
-import org.springframework.web.multipart.MultipartFile;
 
 @Api("Manages superCategoryProduct services")
 @RestController

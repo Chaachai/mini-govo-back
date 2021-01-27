@@ -48,10 +48,19 @@ public class UserServiceImpl implements UserService {
    }
 	@Override	
 	public User save (User user){
-		if (user.getPassword()!=null)
+		if (user==null){
+			return null;
+		}else if (StringUtil.isEmpty(user.getEmail())){
+			return null;
+		}else if (userDao.findByEmail(user.getEmail())!=null){
+			return null;
+		}else if (user.getPassword()==null){
+			return null;
+		}else {
 			user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-	    User savedUser = userDao.save(user);
-	   return savedUser;
+			User savedUser = userDao.save(user);
+			return savedUser;
+		}
 	}
 
     @Override
