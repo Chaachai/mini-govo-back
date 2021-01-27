@@ -72,6 +72,9 @@ public class AuthRest {
         userConverter.setCommands(Boolean.TRUE);
         User user = userConverter.toItem(userVo);
         user = userService.save(user);
+        if (user==null){
+            return null;
+        }
         return new AuthResponse(jwtUtil.generateToken(userVo.getEmail()), userConverter.toVo(user));
     }
 
