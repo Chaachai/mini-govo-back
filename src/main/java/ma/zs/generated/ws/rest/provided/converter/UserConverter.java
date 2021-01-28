@@ -10,11 +10,11 @@ import ma.zs.generated.ws.rest.provided.vo.UserVo;
 
 @Component
 public class UserConverter extends AbstractConverter<User, UserVo> {
-    private Boolean role;
-    private Boolean city;
-    private Boolean specialityCollaborators;
-    private Boolean ratings;
-    private Boolean commands;
+    private Boolean role = false;
+    private Boolean city= false;
+    private Boolean specialityCollaborators= false;
+    private Boolean ratings= false;
+    private Boolean commands= false;
 
     @Autowired
     private RoleConverter roleConverter;

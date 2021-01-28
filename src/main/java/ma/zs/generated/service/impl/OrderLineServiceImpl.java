@@ -184,7 +184,7 @@ public class OrderLineServiceImpl implements OrderLineService {
 			  }
 	    
 	          if(orderLine.getProduct()!=null){
-				    Product product = productService.findByReference(orderLine.getProduct().getReference());
+				    Product product = productService.findById(orderLine.getProduct().getId());
 				  if(product == null)
 				  orderLine.setProduct(productService.save(orderLine.getProduct()));
 				  else
