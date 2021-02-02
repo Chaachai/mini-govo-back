@@ -293,6 +293,22 @@ public class OrderLineServiceImpl implements OrderLineService {
    
 	 return entityManager.createQuery(query).getResultList();
 	}
-	
- 
+
+	@Override
+	public OrderLine updateOrderStatus(OrderLine orderLine) {
+		OrderLine dbOrderLine;
+		if (orderLine!=null && orderLine.getId()!=null){
+			dbOrderLine= findById(orderLine.getId());
+			if (dbOrderLine!=null && orderLine.getOrderStatus()!=null){
+				OrderStatus dbOrderStatus= orderStatusService.findById(orderLine.getOrderStatus().getId());
+				if (dbOrderStatus!=null){
+					dbOrderLine.setOrderStatus(dbOrderStatus);
+					orderLineDao.save(orderLine);
+					return dbOrderLine;
+				}
+			}
+
+		}
+		return null;
+	}
 }

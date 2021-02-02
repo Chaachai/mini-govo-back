@@ -90,4 +90,6 @@ public interface OrderLineService {
      * @return the searhed list OrderLine 
      */
 	List<OrderLine> findByCriteria( OrderLineVo orderLineVo);
+
+    OrderLine updateOrderStatus(OrderLine orderLine);
 }

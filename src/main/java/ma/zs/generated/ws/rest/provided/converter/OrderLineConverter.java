@@ -63,6 +63,8 @@ public class OrderLineConverter extends AbstractConverter<OrderLine,OrderLineVo>
                   item.setDateDelivery(vo.getDateDelivery());
 			 if(StringUtil.isNotEmpty(vo.getPreparedQte()))
                   item.setPreparedQte(NumberUtil.toBigDecimal(vo.getPreparedQte()));
+			 if(StringUtil.isNotEmpty(vo.getDeliveredQte()))
+                  item.setDeliveredQte(NumberUtil.toBigDecimal(vo.getDeliveredQte()));
 			 if(StringUtil.isNotEmpty(vo.getSentQte()))
                   item.setSentQte(NumberUtil.toBigDecimal(vo.getSentQte()));
 			 if(StringUtil.isNotEmpty(vo.getPrice()))

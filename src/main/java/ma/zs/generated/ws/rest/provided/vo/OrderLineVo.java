@@ -40,7 +40,8 @@ public class OrderLineVo {
      private String id ;
    
      private String orderedQte ;
-   
+     private String deliveredQte ;
+
 
 	private OrderStatusVo orderStatusVo ;
 	private UserVo deliveryManVo ;
@@ -519,9 +520,12 @@ public class OrderLineVo {
      public void setProductVo(ProductVo productVo){
           this.productVo = productVo;
      }
-   
 
+    public String getDeliveredQte() {
+        return deliveredQte;
+    }
 
-
-
+    public void setDeliveredQte(String deliveredQte) {
+        this.deliveredQte = deliveredQte;
+    }
 }
