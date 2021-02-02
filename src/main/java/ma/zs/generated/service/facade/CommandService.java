@@ -102,4 +102,6 @@ public interface CommandService {
      * @return the searhed list Command 
      */
 	List<Command> findByCriteria( CommandVo commandVo);
+
+    Command updateOrderStatus(Command command);
 }

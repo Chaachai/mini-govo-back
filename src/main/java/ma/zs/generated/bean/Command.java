@@ -208,6 +208,33 @@ public class Command {
      }
 
 
-
+    @Override
+    public String toString() {
+        return "Command{" +
+                "id=" + id +
+                ", commentResolution=" + commentResolution +
+                ", regulationDate=" + regulationDate +
+                ", longitudeDelivery=" + longitudeDelivery +
+                ", commentResolutionDate=" + commentResolutionDate +
+                ", dateSubmission=" + dateSubmission +
+                ", nbrTotalComment=" + nbrTotalComment +
+                ", yearCommand=" + yearCommand +
+                ", latitudeDelivery=" + latitudeDelivery +
+                ", orderDate=" + orderDate +
+                ", address='" + address + '\'' +
+                ", reference='" + reference + '\'' +
+                ", dayCommand=" + dayCommand +
+                ", monthCommand=" + monthCommand +
+                ", remark='" + remark + '\'' +
+                ", total=" + total +
+                ", admin=" + admin +
+                ", deliveryMan=" + deliveryMan +
+                ", client=" + client +
+                ", city=" + city +
+                ", orderStatus=" + orderStatus +
+                ", orderLines=" + orderLines +
+                ", comments=" + comments +
+                '}';
+    }
 }
 

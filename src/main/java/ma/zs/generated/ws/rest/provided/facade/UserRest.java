@@ -56,6 +56,9 @@ public class UserRest {
     @ApiOperation("Finds a list of all users")
     @GetMapping("/")
     public List<UserVo> findAll() {
+        userConverter.setCity(Boolean.TRUE);
+        userConverter.setRole(Boolean.TRUE);
+        //userConverter.setSpecialityCollaborators(Boolean.TRUE);
         return userConverter.toVo(userService.findAll());
     }
 

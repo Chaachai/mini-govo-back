@@ -460,6 +460,54 @@ public class CommandVo {
           this.commentsVo = commentsVo;
      }
 
-
-
+    @Override
+    public String toString() {
+        return "CommandVo{" +
+                "commentResolution='" + commentResolution + '\'' +
+                ", regulationDate='" + regulationDate + '\'' +
+                ", longitudeDelivery='" + longitudeDelivery + '\'' +
+                ", commentResolutionDate='" + commentResolutionDate + '\'' +
+                ", dateSubmission='" + dateSubmission + '\'' +
+                ", nbrTotalComment='" + nbrTotalComment + '\'' +
+                ", yearCommand='" + yearCommand + '\'' +
+                ", latitudeDelivery='" + latitudeDelivery + '\'' +
+                ", orderDate='" + orderDate + '\'' +
+                ", address='" + address + '\'' +
+                ", reference='" + reference + '\'' +
+                ", id='" + id + '\'' +
+                ", dayCommand='" + dayCommand + '\'' +
+                ", monthCommand='" + monthCommand + '\'' +
+                ", remark='" + remark + '\'' +
+                ", total='" + total + '\'' +
+                ", adminVo=" + adminVo +
+                ", deliveryManVo=" + deliveryManVo +
+                ", clientVo=" + clientVo +
+                ", cityVo=" + cityVo +
+                ", orderStatusVo=" + orderStatusVo +
+                ", orderLinesVo=" + orderLinesVo +
+                ", commentsVo=" + commentsVo +
+                ", regulationDateMax='" + regulationDateMax + '\'' +
+                ", regulationDateMin='" + regulationDateMin + '\'' +
+                ", longitudeDeliveryMax='" + longitudeDeliveryMax + '\'' +
+                ", longitudeDeliveryMin='" + longitudeDeliveryMin + '\'' +
+                ", commentResolutionDateMax='" + commentResolutionDateMax + '\'' +
+                ", commentResolutionDateMin='" + commentResolutionDateMin + '\'' +
+                ", dateSubmissionMax='" + dateSubmissionMax + '\'' +
+                ", dateSubmissionMin='" + dateSubmissionMin + '\'' +
+                ", nbrTotalCommentMax='" + nbrTotalCommentMax + '\'' +
+                ", nbrTotalCommentMin='" + nbrTotalCommentMin + '\'' +
+                ", yearCommandMax='" + yearCommandMax + '\'' +
+                ", yearCommandMin='" + yearCommandMin + '\'' +
+                ", latitudeDeliveryMax='" + latitudeDeliveryMax + '\'' +
+                ", latitudeDeliveryMin='" + latitudeDeliveryMin + '\'' +
+                ", orderDateMax='" + orderDateMax + '\'' +
+                ", orderDateMin='" + orderDateMin + '\'' +
+                ", dayCommandMax='" + dayCommandMax + '\'' +
+                ", dayCommandMin='" + dayCommandMin + '\'' +
+                ", monthCommandMax='" + monthCommandMax + '\'' +
+                ", monthCommandMin='" + monthCommandMin + '\'' +
+                ", totalMax='" + totalMax + '\'' +
+                ", totalMin='" + totalMin + '\'' +
+                '}';
+    }
 }

@@ -319,6 +319,24 @@ public class CommandServiceImpl implements CommandService {
    
 	 return entityManager.createQuery(query).getResultList();
 	}
-	
- 
+
+	@Override
+	public Command updateOrderStatus(Command command) {
+		Command dbCommand;
+		if (command!=null && command.getId()!=null){
+			dbCommand= findById(command.getId());
+			if (dbCommand!=null && command.getOrderStatus()!=null){
+				OrderStatus dbOrderStatus= orderStatusService.findById(command.getOrderStatus().getId());
+				if (dbOrderStatus!=null){
+					dbCommand.setOrderStatus(dbOrderStatus);
+					commandDao.save(command);
+					return dbCommand;
+				}
+			}
+
+		}
+		return null;
+	}
+
+
 }
