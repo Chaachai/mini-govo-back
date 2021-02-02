@@ -30,105 +30,113 @@ import ma.zs.generated.service.util.*;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserDao userDao;
+	@Autowired
+	private UserDao userDao;
 
-    @Autowired
-    private ProductService productService;
+	@Autowired
+	private EntityManager entityManager;
 
-    @Autowired
-    private EntityManager entityManager;
+	@Override
+	public User updateAddressAndPhone(User user) {
+		User foundedUser = findById(user.getId());
+		if (foundedUser != null) {
+			foundedUser.setAddress(user.getAddress());
+			foundedUser.setPhoneNumber(user.getPhoneNumber());
+			userDao.save(foundedUser);
+			return foundedUser;
+		} else {
+			return null;
+		}
+	}
 
-    @Override
-    public List<User> findAll() {
-        return userDao.findAll();
-    }
+	@Override
+	public List<User> findAll() {
+		return userDao.findAll();
+	}
 
-    @Override
-    public User findById(Long id) {
-        if (id == null)
-            return null;
-        return userDao.getOne(id);
-    }
+	@Override
+	public User findById(Long id) {
+		if (id == null)
+			return null;
+		return userDao.getOne(id);
+	}
 
-    @Transactional
-    public void deleteById(Long id) {
-        userDao.deleteById(id);
-    }
+	@Transactional
+	public void deleteById(Long id) {
+		userDao.deleteById(id);
+	}
 
-    @Override
-    public User save(User user) {
-        if (user == null) {
-            return null;
-        } else if (StringUtil.isEmpty(user.getEmail())) {
-            return null;
-        } else if (userDao.findByEmail(user.getEmail()) != null) {
-            return null;
-        } else if (user.getPassword() == null) {
-            return null;
-        } else {
-            user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-            User savedUser = userDao.save(user);
-            return savedUser;
-        }
-    }
+	@Override
+	public User save(User user) {
+		if (user == null) {
+			return null;
+		} else if (StringUtil.isEmpty(user.getEmail())) {
+			return null;
+		} else if (userDao.findByEmail(user.getEmail()) != null) {
+			return null;
+		} else if (user.getPassword() == null) {
+			return null;
+		} else {
+			user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+			User savedUser = userDao.save(user);
+			return savedUser;
+		}
+	}
 
-    @Override
-    public List<User> save(List<User> users) {
-        List<User> list = new ArrayList<User>();
-        for (User user : users) {
-            list.add(save(user));
-        }
-        return list;
-    }
+	@Override
+	public List<User> save(List<User> users) {
+		List<User> list = new ArrayList<User>();
+		for (User user : users) {
+			list.add(save(user));
+		}
+		return list;
+	}
 
+	@Override
+	public User update(User user) {
 
-    @Override
-    public User update(User user) {
+		User foundedUser = findById(user.getId());
+		if (foundedUser == null)
+			return null;
 
+		return userDao.save(user);
 
-        User foundedUser = findById(user.getId());
-        if (foundedUser == null)
-            return null;
+	}
 
-        return userDao.save(user);
+	@Override
+	@Transactional
+	public int delete(User user) {
 
-    }
+		if (user.getId() == null)
+			return -1;
+		User foundedUser = findById(user.getId());
+		if (foundedUser == null)
+			return -1;
+		userDao.delete(foundedUser);
+		return 1;
+	}
 
-    @Override
-    @Transactional
-    public int delete(User user) {
+	public List<User> findByCriteria(UserVo userVo) {
+		String query = "SELECT o FROM User o where 1=1 ";
+		query += SearchUtil.addConstraint("o", "id", "=", userVo.getId());
+		return entityManager.createQuery(query).getResultList();
+	}
 
-        if (user.getId() == null)
-            return -1;
-        User foundedUser = findById(user.getId());
-        if (foundedUser == null)
-            return -1;
-        userDao.delete(foundedUser);
-        return 1;
-    }
+	@Override
+	public User findByEmail(String email) {
+		return userDao.findByEmail(email);
+	}
 
+	@Override
+	public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+		User user = userDao.findByEmail(s);
+		Collection<GrantedAuthority> authorities = new ArrayList<>();
+		authorities.add(new SimpleGrantedAuthority(user.getAuthority().getAuthority()));
+		org.springframework.security.core.userdetails.User userDetailsUser = new org.springframework.security.core.userdetails.User(
+				user.getEmail(), user.getPassword(), authorities);
+		return userDetailsUser;
+	}
 
-    public List<User> findByCriteria(UserVo userVo) {
-        String query = "SELECT o FROM User o where 1=1 ";
-        query += SearchUtil.addConstraint("o", "id", "=", userVo.getId());
-        return entityManager.createQuery(query).getResultList();
-    }
-
-    @Override
-    public User findByEmail(String email) {
-        return userDao.findByEmail(email);
-    }
-
-
-    @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User user = userDao.findByEmail(s);
-        Collection<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(user.getAuthority().getAuthority()));
-        org.springframework.security.core.userdetails.User userDetailsUser = new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
-        return userDetailsUser;
-    }
 
     public List<User> findByCategoryProduitId(Long id) {
         if (id != null) return userDao.findByCategoryProduitId(id);
