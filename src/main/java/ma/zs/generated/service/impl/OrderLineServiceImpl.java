@@ -196,7 +196,7 @@ public class OrderLineServiceImpl implements OrderLineService {
     public OrderLine save(OrderLine orderLine) {
 
         if (orderLine.getOrderStatus() != null) {
-            OrderStatus orderStatus = orderStatusService.findByCode(orderLine.getOrderStatus().getCode());
+            OrderStatus orderStatus = orderStatusService.findById(orderLine.getOrderStatus().getId());
             if (orderStatus == null)
                 orderLine.setOrderStatus(orderStatusService.save(orderLine.getOrderStatus()));
             else
