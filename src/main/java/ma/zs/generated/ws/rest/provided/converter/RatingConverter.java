@@ -15,9 +15,9 @@ public class RatingConverter extends AbstractConverter<Rating,RatingVo>{
          private UserConverter userConverter ;
 	   @Autowired
          private OrderLineConverter orderLineConverter ;
-    private Boolean client;
-    private Boolean orderLine;
-    private Boolean collaborator;
+    private Boolean client=false;
+    private Boolean orderLine=false;
+    private Boolean collaborator=false;
 
 	public  RatingConverter(){
 		init(true);
@@ -67,7 +67,7 @@ public class RatingConverter extends AbstractConverter<Rating,RatingVo>{
             if(item.getOrderLine()!=null && this.orderLine) {
 				   vo.setOrderLineVo(orderLineConverter.toVo(item.getOrderLine())) ;
 			   } 
-            if(item.getCollaborator()!=null && this.collaborator) {
+            if(item.getCollaborator()!=null && collaborator) {
 				   vo.setCollaboratorVo(userConverter.toVo(item.getCollaborator())) ;
 			   } 
 

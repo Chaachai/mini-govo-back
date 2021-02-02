@@ -208,4 +208,13 @@ public class OrderLineRest {
         return orderLineConverter.toVo(orderLine);
     }
 
+    @PutMapping("/collaborator/")
+    public OrderLineVo affectCollaborator(@RequestBody OrderLineVo orderLineVo) {
+        orderLineConverter.setOrderStatus(Boolean.TRUE);
+        orderLineConverter.setCollaborator(Boolean.TRUE);
+        OrderLine orderLine = orderLineConverter.toItem(orderLineVo);
+        orderLine = orderLineService.affectCollaborator(orderLine);
+        return orderLineConverter.toVo(orderLine);
+    }
+
 }

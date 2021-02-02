@@ -92,4 +92,6 @@ public interface OrderLineService {
 	List<OrderLine> findByCriteria( OrderLineVo orderLineVo);
 
     OrderLine updateOrderStatus(OrderLine orderLine);
+
+    OrderLine affectCollaborator(OrderLine orderLine);
 }

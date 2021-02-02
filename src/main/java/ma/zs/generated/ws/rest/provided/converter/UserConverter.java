@@ -1,5 +1,6 @@
 package ma.zs.generated.ws.rest.provided.converter;
 
+import ma.zs.generated.bean.Rating;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ma.zs.generated.service.util.*;
@@ -8,13 +9,18 @@ import ma.zs.generated.service.util.*;
 import ma.zs.generated.bean.User;
 import ma.zs.generated.ws.rest.provided.vo.UserVo;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 @Component
 public class UserConverter extends AbstractConverter<User, UserVo> {
     private Boolean role = false;
-    private Boolean city= false;
-    private Boolean specialityCollaborators= false;
-    private Boolean ratings= false;
-    private Boolean commands= false;
+    private Boolean city = false;
+    private Boolean specialityCollaborators = false;
+    private Boolean pricingCollaborators = false;
+    private Boolean ratings = false;
+    private Boolean ratingAVG = false;
+    private Boolean commands = false;
 
     @Autowired
     private RoleConverter roleConverter;
@@ -22,6 +28,8 @@ public class UserConverter extends AbstractConverter<User, UserVo> {
     private CityConverter cityConverter;
     @Autowired
     private SpecialiteCollaboratorConverter specialiteCollaboratorConverter;
+    @Autowired
+    private PricingCollaboratorConverter pricingCollaboratorConverter;
     @Autowired
     private RatingConverter ratingConverter;
     @Autowired
@@ -70,7 +78,9 @@ public class UserConverter extends AbstractConverter<User, UserVo> {
                 item.setEnabledNewCommand(NumberUtil.toBoolean(vo.getEnabledNewCommand()));
             if (vo.getSpecialityCollaboratorsVos() != null && this.specialityCollaborators)
                 item.setSpecialityCollaborators(specialiteCollaboratorConverter.toItem(vo.getSpecialityCollaboratorsVos()));
-            if (vo.getRatingVos() != null && this.specialityCollaborators)
+            if (vo.getPricingCollaboratorsVos() != null && this.pricingCollaborators)
+                item.setPricingCollaborators(pricingCollaboratorConverter.toItem(vo.getPricingCollaboratorsVos()));
+            if (vo.getRatingVos() != null && this.ratings)
                 item.setRatings(ratingConverter.toItem(vo.getRatingVos()));
             if (vo.getCommandVos() != null && this.specialityCollaborators)
                 item.setCommands(commandConverter.toItem(vo.getCommandVos()));
@@ -118,8 +128,21 @@ public class UserConverter extends AbstractConverter<User, UserVo> {
                 vo.setEnabledNewCommand(NumberUtil.toString(item.getEnabledNewCommand()));
             if (item.getSpecialityCollaborators() != null && specialityCollaborators)
                 vo.setSpecialityCollaboratorsVos(specialiteCollaboratorConverter.toVo(item.getSpecialityCollaborators()));
-            if (item.getRatings() != null && specialityCollaborators)
+            if (item.getPricingCollaborators() != null && pricingCollaborators)
+                vo.setPricingCollaboratorsVos(pricingCollaboratorConverter.toVo(item.getPricingCollaborators()));
+            if (item.getRatings() != null && ratings) {
                 vo.setRatingVos(ratingConverter.toVo(item.getRatings()));
+                if (ratingAVG) {
+                    BigDecimal avg = new BigDecimal(0);
+                    for (Rating r : item.getRatings()) {
+                        avg = avg.add(BigDecimal.valueOf(r.getMark()));
+                    }
+                    if (avg.equals(0)) avg = avg.divide(BigDecimal.valueOf(item.getRatings().size()));
+                    avg = avg.setScale(2, RoundingMode.CEILING);
+                    vo.setRating(NumberUtil.toString(avg));
+                }
+
+            }
 //            if (item.getCommands() != null && specialityCollaborators)
 //                vo.setCommandVos(commandConverter.toVo(item.getCommands()));
             return vo;
@@ -208,5 +231,29 @@ public class UserConverter extends AbstractConverter<User, UserVo> {
 
     public void setCommandConverter(CommandConverter commandConverter) {
         this.commandConverter = commandConverter;
+    }
+
+    public Boolean getPricingCollaborators() {
+        return pricingCollaborators;
+    }
+
+    public void setPricingCollaborators(Boolean pricingCollaborators) {
+        this.pricingCollaborators = pricingCollaborators;
+    }
+
+    public PricingCollaboratorConverter getPricingCollaboratorConverter() {
+        return pricingCollaboratorConverter;
+    }
+
+    public void setPricingCollaboratorConverter(PricingCollaboratorConverter pricingCollaboratorConverter) {
+        this.pricingCollaboratorConverter = pricingCollaboratorConverter;
+    }
+
+    public Boolean getRatingAVG() {
+        return ratingAVG;
+    }
+
+    public void setRatingAVG(Boolean ratingAVG) {
+        this.ratingAVG = ratingAVG;
     }
 }

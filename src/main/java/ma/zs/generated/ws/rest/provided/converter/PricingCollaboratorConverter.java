@@ -12,8 +12,8 @@ import ma.zs.generated.ws.rest.provided.vo.PricingCollaboratorVo;
 
 @Component
 public class PricingCollaboratorConverter extends AbstractConverter<PricingCollaborator, PricingCollaboratorVo> {
-    private Boolean product;
-    private Boolean collaborator;
+    private Boolean product=false;
+    private Boolean collaborator=false;
     @Autowired
     private UserConverter userConverter;
     @Autowired
