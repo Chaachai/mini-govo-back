@@ -143,6 +143,7 @@ public class UserServiceImpl implements UserService {
         else return null;
     }
 
+   @Autowired private ProductService productService;
     //collaborator having speciality on the category oof a product
     public List<User> findByProductId(Long id) {
         Product product = productService.findById(id);
