@@ -25,8 +25,11 @@ public class UserVo {
     private String enabled;
     private String enabledNewCommand;
     private List<SpecialiteCollaboratorVo> specialityCollaboratorsVos;
+    private List<PricingCollaboratorVo> pricingCollaboratorsVos;
     private List<RatingVo> ratingVos;
     private List<CommandVo> commandVos;
+
+    private String rating;
 
     public UserVo() {
         super();
@@ -175,5 +178,21 @@ public class UserVo {
 
     public void setCommandVos(List<CommandVo> commandVos) {
         this.commandVos = commandVos;
+    }
+
+    public List<PricingCollaboratorVo> getPricingCollaboratorsVos() {
+        return pricingCollaboratorsVos;
+    }
+
+    public void setPricingCollaboratorsVos(List<PricingCollaboratorVo> pricingCollaboratorsVos) {
+        this.pricingCollaboratorsVos = pricingCollaboratorsVos;
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
     }
 }

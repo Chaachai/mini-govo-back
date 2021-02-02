@@ -81,6 +81,21 @@ public class UserRest {
         return userConverter.toVo(userService.findByCriteria(userVo));
     }
 
+    @ApiOperation("Finds a collaborator by product: specialiteCollaborator ")
+    @GetMapping("/collaborator/product/id/{id}")
+    public List<UserVo> findCollaboratorByProductId(@PathVariable Long id) {
+        userConverter.setRatings(Boolean.TRUE);
+        userConverter.setRatingAVG(Boolean.TRUE);
+        userConverter.setPricingCollaborators(Boolean.TRUE);
+        userConverter.getRatingConverter().setCollaborator(Boolean.FALSE);
+        userConverter.getRatingConverter().setClient(Boolean.FALSE);
+        List<User> x=userService.findByProductId(id);
+        System.out.println( x.get(0).getPricingCollaborators());;
+        return userConverter.toVo(x);
+    }
+
+
+
     public UserConverter getUserConverter() {
         return userConverter;
     }
@@ -96,6 +111,7 @@ public class UserRest {
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
+
 
 
 }

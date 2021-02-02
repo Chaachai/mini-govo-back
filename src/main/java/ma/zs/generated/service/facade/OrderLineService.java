@@ -74,6 +74,18 @@ public interface OrderLineService {
      */
     OrderLine update(OrderLine orderLine);
     
+    
+    int ignorerTache(Long id);
+    int enchargerTache(Long id);
+    int changeStatus(Long id , Long statusId);
+    
+    
+  //list des taches affectées
+    List<OrderLine> findByCollaboratorIdAndDateAcceptationCollaboratorIsNull(Long id);
+    
+  //list des taches affectées
+    List<OrderLine> findByCollaboratorIdAndDateAcceptationCollaboratorIsNotNull(Long id) ;
+    
        /**
      * delete OrderLine from database
      * @param orderLine - OrderLine to be deleted
@@ -92,4 +104,6 @@ public interface OrderLineService {
 	List<OrderLine> findByCriteria( OrderLineVo orderLineVo);
 
     OrderLine updateOrderStatus(OrderLine orderLine);
+
+    OrderLine affectCollaborator(OrderLine orderLine);
 }

@@ -33,6 +33,8 @@ public class User {
      @OneToMany(mappedBy = "collaborator")
      private List<SpecialiteCollaborator> specialityCollaborators;
      @OneToMany(mappedBy = "collaborator")
+     private List<PricingCollaborator> pricingCollaborators;
+     @OneToMany(mappedBy = "collaborator")
      private List<Rating> ratings;
      @OneToMany(mappedBy = "client", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
      private List<Command> commands;
@@ -183,6 +185,14 @@ public class User {
 
      public void setCommands(List<Command> commands) {
           this.commands = commands;
+     }
+
+     public List<PricingCollaborator> getPricingCollaborators() {
+          return pricingCollaborators;
+     }
+
+     public void setPricingCollaborators(List<PricingCollaborator> pricingCollaborators) {
+          this.pricingCollaborators = pricingCollaborators;
      }
 }
 

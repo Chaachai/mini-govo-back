@@ -3,6 +3,10 @@ package ma.zs.generated.service.impl;
 import java.util.Collection;
 import java.util.List;
 import java.util.ArrayList;
+
+import ma.zs.generated.bean.PricingCollaborator;
+import ma.zs.generated.bean.Product;
+import ma.zs.generated.service.facade.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.jaas.JaasGrantedAuthority;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,7 +17,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.stereotype.Service;
+
 import javax.persistence.EntityManager;
+
 import ma.zs.generated.bean.User;
 import ma.zs.generated.dao.UserDao;
 import ma.zs.generated.service.facade.UserService;
@@ -130,4 +136,33 @@ public class UserServiceImpl implements UserService {
 				user.getEmail(), user.getPassword(), authorities);
 		return userDetailsUser;
 	}
+
+
+    public List<User> findByCategoryProduitId(Long id) {
+        if (id != null) return userDao.findByCategoryProduitId(id);
+        else return null;
+    }
+
+   @Autowired private ProductService productService;
+    //collaborator having speciality on the category oof a product
+    public List<User> findByProductId(Long id) {
+        Product product = productService.findById(id);
+        System.out.println("prod="+product);
+        if (product != null && product.getCategoryProduit() != null) {
+            List<User> users=findByCategoryProduitId(product.getCategoryProduit().getId());
+            for (User u:users) {
+                List<PricingCollaborator> pricingCollaborators=u.getPricingCollaborators();
+                List<PricingCollaborator> newPricingCollaborators=new ArrayList<>();
+                for (PricingCollaborator p:pricingCollaborators) {
+                    System.out.println("2:"+p.getProduct().getId());
+                    if (p.getProduct().getId()==id){
+                        newPricingCollaborators.add(p);
+                        break;
+                    }
+                }
+                u.setPricingCollaborators(newPricingCollaborators);
+            }
+            return users;
+        } else return null;
+    }
 }

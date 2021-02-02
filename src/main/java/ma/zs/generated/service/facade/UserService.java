@@ -74,4 +74,8 @@ public interface UserService extends UserDetailsService {
 	List<User> findByCriteria(UserVo userVo);
 
 	User findByEmail(String email);
+
+	public List<User> findByCategoryProduitId(Long id);
+
+	List<User> findByProductId(Long id);
 }
