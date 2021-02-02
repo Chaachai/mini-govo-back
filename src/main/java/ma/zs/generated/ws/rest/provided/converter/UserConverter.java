@@ -120,8 +120,8 @@ public class UserConverter extends AbstractConverter<User, UserVo> {
                 vo.setSpecialityCollaboratorsVos(specialiteCollaboratorConverter.toVo(item.getSpecialityCollaborators()));
             if (item.getRatings() != null && specialityCollaborators)
                 vo.setRatingVos(ratingConverter.toVo(item.getRatings()));
-            if (item.getCommands() != null && specialityCollaborators)
-                vo.setCommandVos(commandConverter.toVo(item.getCommands()));
+//            if (item.getCommands() != null && specialityCollaborators)
+//                vo.setCommandVos(commandConverter.toVo(item.getCommands()));
             return vo;
 
         }
