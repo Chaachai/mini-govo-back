@@ -51,6 +51,41 @@ public class OrderLineRest {
         orderLine = orderLineService.update(orderLine);
         return orderLineConverter.toVo(orderLine);
     }
+    
+    @ApiOperation("Finds Affected Tasks of a collaborator")
+	@GetMapping("/collaboratorAffectedTasks/id/{id}")
+	public List<OrderLineVo> findByCollaboratorIdAndDateAcceptationCollaboratorIsNull(@PathVariable Long id){
+		return orderLineConverter.toVo(orderLineService.findByCollaboratorIdAndDateAcceptationCollaboratorIsNull(id));
+	}
+	
+	
+	@ApiOperation("Finds Tasks of a collaborator")
+	@GetMapping("/collaboratorTasks/id/{id}")
+	public List<OrderLineVo> findByCollaboratorIdAndDateAcceptationCollaboratorIsNotNull(@PathVariable Long id){
+		return orderLineConverter.toVo(orderLineService.findByCollaboratorIdAndDateAcceptationCollaboratorIsNotNull(id));
+	}
+	
+	@ApiOperation("ignorer tache")
+	@PutMapping("/ignorerTache/id/{id}")
+	public int ignorerTache(@PathVariable Long id){
+//		OrderLine orderLine= orderLineConverter.toItem(orderLineVo);
+	  return orderLineService.ignorerTache(id);
+	}
+	
+	@ApiOperation("s'encharger tache")
+	@PutMapping("/enchargerTache/id/{id}")
+	public int enchargerTache(@PathVariable Long id){
+//		OrderLine orderLine= orderLineConverter.toItem(orderLineVo);
+	  return orderLineService.enchargerTache(id);
+	}
+	
+	@ApiOperation("change task status")
+	@PutMapping("/changeStatus/id/{id}/{statusId}")
+	public int changeStatus(@PathVariable Long id ,@PathVariable Long statusId ){
+//		OrderLine orderLine= orderLineConverter.toItem(orderLineVo);
+	  return orderLineService.changeStatus(id, statusId);
+	}
+	
 
     @ApiOperation("Finds a list of all orderLines")
     @GetMapping("/")

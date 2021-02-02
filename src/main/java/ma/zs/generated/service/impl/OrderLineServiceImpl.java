@@ -94,6 +94,37 @@ public class OrderLineServiceImpl implements OrderLineService {
     }
 
     @Override
+ 	public List<OrderLine> findByCollaboratorIdAndDateAcceptationCollaboratorIsNull(Long id) {
+    	 return orderLineDao.findByCollaboratorIdAndDateAcceptationCollaboratorIsNull(id);
+ 	}
+     
+     @Override
+  	public List<OrderLine> findByCollaboratorIdAndDateAcceptationCollaboratorIsNotNull(Long id) {
+     	 return orderLineDao.findByCollaboratorIdAndDateAcceptationCollaboratorIsNotNull(id);
+  	}
+     @Transactional
+ 	@Override
+ 	public int ignorerTache(Long id) {
+ 		return orderLineDao.ignorerTache(id);
+ 	}
+ 	
+ 	@Transactional
+ 	@Override
+ 	public int enchargerTache(Long id) {
+ 		return orderLineDao.enchargerTache(id);
+ 	}
+ 	
+ 	
+ 	@Transactional
+ 	@Override
+ 	public int changeStatus(Long id, Long statusId) {
+ 	return orderLineDao.changeStatus(id, statusId);
+ 	}
+ 	
+     
+    
+    
+    @Override
     @Transactional
     public int deleteByCollaboratorId(Long id) {
         return orderLineDao.deleteByCollaboratorId(id);
