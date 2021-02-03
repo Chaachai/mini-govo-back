@@ -207,7 +207,7 @@ public class CommandServiceImpl implements CommandService {
 		}
 
 		if (command.getOrderStatus() != null) {
-			OrderStatus orderStatus = orderStatusService.findByCode(command.getOrderStatus().getCode());
+			OrderStatus orderStatus = orderStatusService.findById(command.getOrderStatus().getId());
 			if (orderStatus == null)
 				command.setOrderStatus(orderStatusService.save(command.getOrderStatus()));
 			else
